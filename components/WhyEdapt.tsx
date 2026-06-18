@@ -35,12 +35,12 @@ export function WhyEdapt() {
       <div className="container-x relative z-10">
         <Reveal>
           <p className="eyebrow mb-4">
-            <span className="font-mono text-white/40">03</span> / Why Edapt
+            <span className="font-mono text-white/40">03</span> / Why Edapt Future School
           </p>
         </Reveal>
         <Reveal delay={0.05}>
           <h2 className="max-w-3xl font-display text-display font-bold text-white">
-            What makes Edapt different.
+            What makes Edapt Future School different.
           </h2>
         </Reveal>
 

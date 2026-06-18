@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import { MapPin, Building2, Wifi, Sparkles } from "lucide-react";
 import { Reveal } from "@/components/motion/Reveal";
 import { SITE } from "@/lib/site";
@@ -18,6 +19,27 @@ export function Campus() {
   // Google Maps embed via the public query endpoint — no API key required.
   // Swap `mapQuery` (or this whole src) for a precise place embed when ready.
   const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(SITE.campus.mapQuery)}&output=embed`;
+
+  // Only mount the map iframe once it nears the viewport. This keeps Google
+  // Maps' (heavy) network requests off the initial page load.
+  const mapWrapRef = useRef<HTMLDivElement>(null);
+  const [showMap, setShowMap] = useState(false);
+
+  useEffect(() => {
+    const el = mapWrapRef.current;
+    if (!el || showMap) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setShowMap(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "300px" }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [showMap]);
 
   return (
     <section id="campus" className="relative bg-white py-24 text-ink sm:py-32">
@@ -70,19 +92,31 @@ export function Campus() {
             </Reveal>
           </div>
 
-          {/* Map embed */}
+          {/* Map embed (lazy-mounted when it nears the viewport) */}
           <Reveal delay={0.1}>
-            <div className="overflow-hidden rounded-3xl border border-ink/10 shadow-xl">
-              <iframe
-                title={`Map of ${SITE.campus.full}`}
-                src={mapSrc}
-                width="100%"
-                height="420"
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="block h-[320px] w-full sm:h-[420px]"
-                allowFullScreen
-              />
+            <div
+              ref={mapWrapRef}
+              className="overflow-hidden rounded-3xl border border-ink/10 shadow-xl"
+            >
+              {showMap ? (
+                <iframe
+                  title={`Map of ${SITE.campus.full}`}
+                  src={mapSrc}
+                  width="100%"
+                  height="420"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="block h-[320px] w-full sm:h-[420px]"
+                  allowFullScreen
+                />
+              ) : (
+                <div
+                  className="flex h-[320px] w-full items-center justify-center bg-ink/[0.03] text-ink/40 sm:h-[420px]"
+                  aria-hidden="true"
+                >
+                  <MapPin className="h-8 w-8" />
+                </div>
+              )}
             </div>
           </Reveal>
         </div>

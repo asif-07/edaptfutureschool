@@ -6,7 +6,7 @@ import "./globals.css";
 // Display/heading font — geometric sans, heavy weights for big headlines.
 const display = Space_Grotesk({
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  weight: ["600", "700"],
   variable: "--font-display",
   display: "swap",
 });
