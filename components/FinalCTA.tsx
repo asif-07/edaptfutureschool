@@ -2,12 +2,11 @@
 
 import { ArrowRight, Phone } from "lucide-react";
 import { Reveal } from "@/components/motion/Reveal";
-import { Magnetic } from "@/components/motion/Magnetic";
 import { SITE } from "@/lib/site";
 
 /**
- * Final call-to-action band with a big gradient glow.
- * Scarcity message + Apply Now + tap-to-call phone number.
+ * Final call-to-action band with a soft gradient glow.
+ * Seats message, Apply Now and a tap-to-call number.
  */
 export function FinalCTA() {
   return (
@@ -29,16 +28,12 @@ export function FinalCTA() {
         </Reveal>
         <Reveal delay={0.1}>
           <div className="mt-9 flex flex-col items-center gap-3 sm:flex-row">
-            <Magnetic className="w-full sm:w-auto">
-              <a href="#enquiry" className="btn-gradient w-full sm:w-auto">
-                Apply Now <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </a>
-            </Magnetic>
-            <Magnetic className="w-full sm:w-auto" strength={0.25}>
-              <a href={`tel:${SITE.phoneRaw}`} className="btn-outline w-full sm:w-auto" aria-label={`Call ${SITE.phoneDisplay}`}>
-                <Phone className="h-4 w-4" aria-hidden="true" /> {SITE.phoneDisplay}
-              </a>
-            </Magnetic>
+            <a href="#enquiry" className="btn-gradient w-full sm:w-auto">
+              Apply Now <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </a>
+            <a href={`tel:${SITE.phoneRaw}`} className="btn-outline w-full sm:w-auto" aria-label={`Call ${SITE.phoneDisplay}`}>
+              <Phone className="h-4 w-4" aria-hidden="true" /> {SITE.phoneDisplay}
+            </a>
           </div>
         </Reveal>
       </div>

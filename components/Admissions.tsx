@@ -5,14 +5,14 @@ import { MessageSquare, MapPin, FileCheck, GraduationCap, type LucideIcon } from
 import { RevealGroup, RevealItem, Reveal } from "@/components/motion/Reveal";
 
 const STEPS: { icon: LucideIcon; title: string; desc: string }[] = [
-  { icon: MessageSquare, title: "Enquire", desc: "Call us or submit the enquiry form. We'll reach out fast." },
-  { icon: MapPin, title: "Visit Campus", desc: "Tour Inkel City and meet our team in person." },
-  { icon: FileCheck, title: "Enroll via SCOLE", desc: "Complete your SCOLE Kerala registration with our help." },
-  { icon: GraduationCap, title: "Begin Learning", desc: "Start your AI-powered Plus One journey." },
+  { icon: MessageSquare, title: "Enquire", desc: "Message us on WhatsApp or call. We will get back to you quickly." },
+  { icon: MapPin, title: "Visit Campus", desc: "Come see the campus at Inkel City and meet the team." },
+  { icon: FileCheck, title: "Confirm Admission", desc: "Pick your stream and complete the admission with our help." },
+  { icon: GraduationCap, title: "Start Class", desc: "Join your batch and get going." },
 ];
 
 /**
- * Admissions process — a numbered timeline.
+ * Admissions process as a numbered timeline.
  * Horizontal with a connecting line on desktop, vertical on mobile.
  */
 export function Admissions() {
@@ -21,12 +21,12 @@ export function Admissions() {
       <div className="container-x relative z-10">
         <Reveal>
           <p className="eyebrow mb-4">
-            <span className="font-mono text-white/40">05</span> / Admissions
+            <span className="font-mono text-white/40">06</span> / Admissions
           </p>
         </Reveal>
         <Reveal delay={0.05}>
           <h2 className="max-w-3xl font-display text-display font-bold text-white">
-            Four simple steps to your seat.
+            Four steps to your seat.
           </h2>
         </Reveal>
 

@@ -5,9 +5,9 @@ import { Reveal } from "@/components/motion/Reveal";
 import { SITE } from "@/lib/site";
 
 const HIGHLIGHTS = [
-  { icon: Building2, text: "Premium, modern campus at Inkel City" },
-  { icon: Wifi, text: "Smart classrooms & high-speed connectivity" },
-  { icon: Sparkles, text: "Maker spaces for projects & innovation" },
+  { icon: Building2, text: "A modern campus at Inkel City" },
+  { icon: Wifi, text: "Smart classrooms and fast internet" },
+  { icon: Sparkles, text: "Space to build and work on projects" },
 ];
 
 /**
@@ -24,7 +24,7 @@ export function Campus() {
       <div className="container-x">
         <Reveal>
           <p className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-electric">
-            <span className="font-mono text-ink/40">04</span> / Campus
+            <span className="font-mono text-ink/40">05</span> / Campus
           </p>
         </Reveal>
 
@@ -32,7 +32,7 @@ export function Campus() {
           <div>
             <Reveal delay={0.05}>
               <h2 className="font-display text-display font-bold text-ink">
-                A campus built for modern learning.
+                A campus set up for hands-on learning.
               </h2>
             </Reveal>
             <Reveal delay={0.1}>

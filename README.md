@@ -1,12 +1,12 @@
-# Edapt Future School — Website
+# Edapt Future School Website
 
 A production-ready, futuristic marketing website for **Edapt Future School**, a
-**SCOLE Kerala enrolled** Plus One (+1) institution at **Edapt Campus, Inkel
-City, Malappuram, Kerala**. The site is built for **admissions lead
-generation** — getting parents and students to call or submit an enquiry.
+Plus One (+1) institution at **Edapt Campus, Inkel City, Malappuram, Kerala**.
+The site is built for **admissions lead generation**, getting parents and
+students to call or submit an enquiry.
 
 > **The School Built for the AI Generation.** Plus One admissions open.
-> Learn. Create. Earn. Connect.
+> Come learn, build and find your footing.
 
 ## ✨ Tech stack
 
@@ -59,7 +59,8 @@ edaptfutureschool/
 │   ├── Navbar.tsx             # Sticky glass nav + mobile drawer
 │   ├── Hero.tsx               # Animated gradient hero + stat strip
 │   ├── Vision.tsx             # Editorial positioning band
-│   ├── Streams.tsx            # Two stream cards (Code 05 / Code 39)
+│   ├── Streams.tsx            # Two stream cards (Computer Science / Commerce)
+│   ├── Leadership.tsx         # Founder and CEO bio + photo
 │   ├── WhyEdapt.tsx           # Features grid
 │   ├── Campus.tsx             # Location + Google Map embed
 │   ├── Admissions.tsx         # 4-step admissions timeline
@@ -121,6 +122,6 @@ wordmark.
 ## 📞 Key details
 
 - **Phone:** 9072 616200 (tap-to-call everywhere)
-- **Streams:** Computer Science (Code 05) · Computer Application (Code 39)
+- **Streams:** Computer Science Stream · Commerce with Computer Application
 - **Seats:** 30 per stream
-- **Affiliation:** SCOLE Kerala enrolled
+- **Campus:** Inkel City, Malappuram, Kerala

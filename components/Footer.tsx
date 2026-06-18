@@ -3,7 +3,7 @@ import { NAV_LINKS, SITE } from "@/lib/site";
 
 /**
  * Dark, minimal footer.
- * Wordmark, quick links, contact, SCOLE note, social placeholders, copyright.
+ * Wordmark, quick links, contact, social placeholders, copyright.
  */
 export function Footer() {
   const year = new Date().getFullYear();
@@ -18,7 +18,7 @@ export function Footer() {
               EDAPT <span className="text-electric">FUTURE</span> SCHOOL
             </span>
             <p className="mt-4 max-w-xs text-sm text-white/55">
-              The school built for the AI generation. {SITE.affiliation}.
+              The school built for the AI generation. {SITE.identity}.
             </p>
           </div>
 
@@ -86,7 +86,7 @@ export function Footer() {
           <p>
             © {year} {SITE.name}. All rights reserved.
           </p>
-          <p>{SITE.affiliation} &amp; registered.</p>
+          <p>Inkel City, Malappuram, Kerala.</p>
         </div>
       </div>
     </footer>

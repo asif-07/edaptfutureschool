@@ -2,16 +2,14 @@
 
 import { ArrowRight, Briefcase, Cpu, Check } from "lucide-react";
 import { RevealGroup, RevealItem, Reveal } from "@/components/motion/Reveal";
-import { SpotlightCard } from "@/components/motion/SpotlightCard";
 import { STREAMS, SITE } from "@/lib/site";
 
 // Map of icon names declared in lib/site.ts to Lucide components.
 const ICONS = { Cpu, Briefcase } as const;
 
 /**
- * The core offering: two large glassmorphism stream cards.
- * Side-by-side on desktop, stacked on mobile. Each card has a code badge,
- * subject list, a seats tag and a hover glow.
+ * The two Plus One streams, side by side on desktop and stacked on mobile.
+ * Each card has an icon, the subject list, a seats tag and a gentle hover lift.
  */
 export function Streams() {
   return (
@@ -24,7 +22,7 @@ export function Streams() {
         </Reveal>
         <Reveal delay={0.05}>
           <h2 className="max-w-3xl font-display text-display font-bold text-ink">
-            Two Plus One streams, built for what&apos;s next.
+            Two streams. Pick the one that fits you.
           </h2>
         </Reveal>
 
@@ -33,20 +31,13 @@ export function Streams() {
             const Icon = ICONS[stream.icon as keyof typeof ICONS];
             return (
               <RevealItem key={stream.id}>
-                <SpotlightCard
-                  tilt
-                  maxTilt={5}
-                  className="spotlight shine group relative flex h-full flex-col overflow-hidden rounded-3xl border border-ink/10 bg-ink p-8 text-white transition-shadow duration-300 hover:shadow-[0_24px_60px_-20px_rgba(15,95,224,0.55)] sm:p-10"
-                >
-                  {/* Hover glow */}
+                <article className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-ink/10 bg-ink p-8 text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_60px_-20px_rgba(15,95,224,0.55)] sm:p-10">
+                  {/* Soft hover glow */}
                   <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-brand-glow opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
 
-                  <div className="relative z-10 flex items-center justify-between">
+                  <div className="relative z-10">
                     <span className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-gradient">
                       <Icon className="h-7 w-7 text-white" aria-hidden="true" />
-                    </span>
-                    <span className="rounded-full border border-white/20 bg-white/5 px-3 py-1 text-xs font-semibold tracking-wide text-white/80">
-                      {stream.code}
                     </span>
                   </div>
 
@@ -74,7 +65,7 @@ export function Streams() {
                       Apply <ArrowRight className="h-4 w-4" aria-hidden="true" />
                     </a>
                   </div>
-                </SpotlightCard>
+                </article>
               </RevealItem>
             );
           })}

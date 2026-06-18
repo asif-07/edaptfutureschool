@@ -7,10 +7,11 @@
 export const SITE = {
   name: "Edapt Future School",
   shortName: "EDAPT FUTURE SCHOOL",
-  affiliation: "SCOLE Kerala enrolled",
+  // A line about the school's own identity (no board/affiliation claims).
+  identity: "A future-focused campus in Inkel City, Malappuram",
   tagline: "The School Built for the AI Generation",
   description:
-    "Plus One admissions open at Edapt Future School — a SCOLE Kerala enrolled institution at Inkel City, Malappuram. Learn. Create. Earn. Connect.",
+    "Plus One admissions are open at Edapt Future School in Inkel City, Malappuram. Two streams, 30 seats each. Students learn with AI, work on real projects, and get the time to find what they are good at.",
   url: "https://edaptfutureschool.com",
   websiteLabel: "edaptfutureschool.com",
   // Phone is displayed with a space for readability; tel: links use the raw number.
@@ -41,19 +42,17 @@ export const NAV_LINKS = [
 export const STREAMS = [
   {
     id: "computer-science",
-    name: "Computer Science",
-    code: "Code 05",
+    name: "Computer Science Stream",
     icon: "Cpu",
     subjects: ["Physics", "Chemistry", "Mathematics", "Computer Science"],
-    blurb: "A science-forward path for builders, engineers and problem-solvers.",
+    blurb: "For students who like maths, science and building things that work.",
   },
   {
     id: "computer-application",
-    name: "Computer Application",
-    code: "Code 39",
+    name: "Commerce with Computer Application",
     icon: "Briefcase",
     subjects: ["Business Studies", "Accountancy", "Economics", "Computer Application"],
-    blurb: "A commerce-meets-tech path for entrepreneurs and future founders.",
+    blurb: "For students drawn to business, money and practical computer skills.",
   },
 ] as const;
 

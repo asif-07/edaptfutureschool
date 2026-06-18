@@ -10,7 +10,7 @@ import { SITE } from "@/lib/site";
  */
 export function MobileCTA() {
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-ink/90 px-4 py-3 backdrop-blur-xl lg:hidden">
+    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-ink/95 px-4 py-3 backdrop-blur-md lg:hidden">
       <div className="mx-auto flex max-w-md items-center gap-3">
         <a
           href={`tel:${SITE.phoneRaw}`}

@@ -1,86 +1,43 @@
 "use client";
 
-import { useRef } from "react";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useMotionValue,
-  useSpring,
-  useReducedMotion,
-  type Variants,
-} from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { ArrowRight, ChevronDown, MapPin } from "lucide-react";
 import { SITE } from "@/lib/site";
-import { Magnetic } from "@/components/motion/Magnetic";
 import { CountUp } from "@/components/motion/CountUp";
 
 /**
  * Full-viewport dark hero.
- * Upgrades: cursor-reactive gradient glow, scroll-linked parallax, a
- * word-by-word blur-in headline, count-up stats and magnetic CTAs.
+ * Kept light on effects: a soft animated gradient glow, a gentle word-by-word
+ * fade-and-rise headline and count-up stats. Transform/opacity only.
  */
 
-// Headline split into words so each can animate in sequence.
+// Headline split into words so each can fade in gently in sequence.
 const LINE_1 = ["The", "School", "Built", "for", "the"];
 const LINE_2 = ["AI", "Generation"]; // rendered with the brand gradient
 
 const wordContainer: Variants = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.06, delayChildren: 0.15 } },
+  show: { transition: { staggerChildren: 0.06, delayChildren: 0.12 } },
 };
 const word: Variants = {
-  hidden: { opacity: 0, y: "0.5em", filter: "blur(8px)" },
-  show: { opacity: 1, y: "0em", filter: "blur(0px)", transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
+  hidden: { opacity: 0, y: "0.4em" },
+  show: { opacity: 1, y: "0em", transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
 };
 
 export function Hero() {
-  const reduce = useReducedMotion();
-  const sectionRef = useRef<HTMLElement>(null);
-
-  // Scroll-linked parallax: content drifts up & fades, glow scales as you scroll.
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end start"],
-  });
-  const contentY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 120]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
-  const glowScale = useTransform(scrollYProgress, [0, 1], [1, 1.35]);
-
-  // Cursor-reactive glow position.
-  const glowX = useMotionValue(0);
-  const glowY = useMotionValue(0);
-  const sgx = useSpring(glowX, { stiffness: 60, damping: 20 });
-  const sgy = useSpring(glowY, { stiffness: 60, damping: 20 });
-
-  const handlePointer = (e: React.MouseEvent<HTMLElement>) => {
-    if (reduce) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    glowX.set((e.clientX - rect.left - rect.width / 2) * 0.08);
-    glowY.set((e.clientY - rect.top - rect.height / 2) * 0.08);
-  };
-
   return (
     <section
       id="top"
-      ref={sectionRef}
-      onMouseMove={handlePointer}
       className="grain relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden bg-ink pt-20"
     >
-      {/* Animated + cursor-reactive gradient glow */}
+      {/* Soft animated gradient glow */}
       <div className="pointer-events-none absolute inset-0 z-0" aria-hidden="true">
-        <motion.div
-          style={{ x: sgx, y: sgy, scale: glowScale }}
-          className="absolute left-1/2 top-1/3 h-[80vmin] w-[80vmin] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-glow blur-2xl animate-glow-drift"
-        />
+        <div className="absolute left-1/2 top-1/3 h-[80vmin] w-[80vmin] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-glow blur-2xl animate-glow-drift" />
         {/* faint grid lines for editorial depth */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
       </div>
 
-      <motion.div
-        style={{ y: contentY, opacity: contentOpacity }}
-        className="container-x relative z-10 flex flex-col items-center text-center"
-      >
+      <div className="container-x relative z-10 flex flex-col items-center text-center">
         {/* Eyebrow */}
         <motion.span
           initial={{ opacity: 0, y: 12 }}
@@ -89,7 +46,7 @@ export function Hero() {
           className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-medium text-white/80 backdrop-blur-sm"
         >
           <MapPin className="h-3.5 w-3.5 text-electric" aria-hidden="true" />
-          {SITE.affiliation} · Inkel City, Malappuram
+          Inkel City, Malappuram, Kerala
         </motion.span>
 
         {/* Word-by-word headline */}
@@ -121,45 +78,41 @@ export function Hero() {
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.6, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
           className="mt-6 max-w-xl text-base text-white/65 sm:text-lg"
         >
-          Plus One admissions open. <span className="text-white">Learn. Create. Earn. Connect.</span>
+          Plus One admissions are open. <span className="text-white">Come learn, build and find your footing.</span>
         </motion.p>
 
         {/* CTAs */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.6, delay: 0.55, ease: [0.22, 1, 0.36, 1] }}
           className="mt-9 flex flex-col items-center gap-3 sm:flex-row"
         >
-          <Magnetic className="w-full sm:w-auto">
-            <a href="#enquiry" className="btn-gradient w-full sm:w-auto">
-              Apply Now <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </a>
-          </Magnetic>
-          <Magnetic className="w-full sm:w-auto" strength={0.25}>
-            <a href="#streams" className="btn-outline w-full sm:w-auto">
-              Explore Streams
-            </a>
-          </Magnetic>
+          <a href="#enquiry" className="btn-gradient w-full sm:w-auto">
+            Apply Now <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </a>
+          <a href="#streams" className="btn-outline w-full sm:w-auto">
+            Explore Streams
+          </a>
         </motion.div>
 
         {/* Stat strip with count-up */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.6, delay: 0.65, ease: [0.22, 1, 0.36, 1] }}
           className="mt-14 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm text-white/55 sm:gap-x-10"
         >
           <Stat to={2} label="Streams" />
           <span className="hidden h-4 w-px bg-white/15 sm:block" aria-hidden="true" />
-          <Stat to={30} label="Seats Each" />
+          <Stat to={30} label="Seats per Stream" />
           <span className="hidden h-4 w-px bg-white/15 sm:block" aria-hidden="true" />
-          <Stat to={100} suffix="%" label="SCOLE Certified" />
+          <Stat to={60} label="Total Seats" />
         </motion.div>
-      </motion.div>
+      </div>
 
       {/* Scroll-down indicator */}
       <a

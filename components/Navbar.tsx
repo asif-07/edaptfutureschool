@@ -34,12 +34,12 @@ export function Navbar() {
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-300",
-        scrolled ? "border-b border-white/10 bg-ink/70 backdrop-blur-xl" : "border-b border-transparent bg-transparent"
+        scrolled ? "border-b border-white/10 bg-ink/80 backdrop-blur-md" : "border-b border-transparent bg-transparent"
       )}
     >
       <nav className="container-x flex h-16 items-center justify-between" aria-label="Primary">
         {/* Wordmark */}
-        <a href="#top" className="group flex items-center gap-2" aria-label={`${SITE.name} — home`}>
+        <a href="#top" className="group flex items-center gap-2" aria-label={`${SITE.name}, home`}>
           <span className="font-display text-sm font-bold tracking-[0.18em] text-white sm:text-base">
             EDAPT <span className="text-electric">FUTURE</span> SCHOOL
           </span>
@@ -91,7 +91,7 @@ export function Navbar() {
       <div
         id="mobile-drawer"
         className={cn(
-          "overflow-hidden border-t border-white/10 bg-ink/95 backdrop-blur-xl transition-[max-height] duration-300 lg:hidden",
+          "overflow-hidden border-t border-white/10 bg-ink/95 backdrop-blur-md transition-[max-height] duration-300 lg:hidden",
           open ? "max-h-[80vh]" : "max-h-0"
         )}
       >

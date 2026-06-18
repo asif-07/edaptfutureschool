@@ -3,7 +3,6 @@
 import { useState, type FormEvent } from "react";
 import { MessageCircle, Loader2, AlertCircle } from "lucide-react";
 import { Reveal } from "@/components/motion/Reveal";
-import { Magnetic } from "@/components/motion/Magnetic";
 import { STREAMS, SITE } from "@/lib/site";
 import { buildWhatsAppEnquiryUrl } from "@/lib/whatsapp";
 
@@ -68,7 +67,7 @@ export function EnquiryForm() {
         <div>
           <Reveal>
             <p className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-electric">
-              <span className="font-mono text-ink/40">06</span> / Enquire
+              <span className="font-mono text-ink/40">07</span> / Enquire
             </p>
           </Reveal>
           <Reveal delay={0.05}>
@@ -78,8 +77,7 @@ export function EnquiryForm() {
           </Reveal>
           <Reveal delay={0.1}>
             <p className="mt-5 max-w-md text-ink/60">
-              Tell us a little about you and we&apos;ll get in touch about Plus One admissions. Prefer to
-              talk now?{" "}
+              Leave your details and we will get back to you about admissions. Would rather talk now?{" "}
               <a href={`tel:${SITE.phoneRaw}`} className="font-semibold text-electric underline-offset-4 hover:underline">
                 Call {SITE.phoneDisplay}
               </a>
@@ -96,7 +94,7 @@ export function EnquiryForm() {
                 <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366]/15 text-[#25D366]">
                   <MessageCircle className="h-8 w-8" aria-hidden="true" />
                 </span>
-                <h3 className="mt-4 font-display text-2xl font-bold text-ink">Opening WhatsApp…</h3>
+                <h3 className="mt-4 font-display text-2xl font-bold text-ink">Opening WhatsApp...</h3>
                 <p className="mt-2 max-w-sm text-ink/60">
                   We&apos;ve opened a WhatsApp chat with your details ready to send. Just hit send and our
                   admissions team will take it from there.
@@ -164,7 +162,7 @@ export function EnquiryForm() {
                     </option>
                     {STREAMS.map((s) => (
                       <option key={s.id} value={s.name}>
-                        {s.name} ({s.code})
+                        {s.name}
                       </option>
                     ))}
                   </select>
@@ -189,23 +187,21 @@ export function EnquiryForm() {
                   </p>
                 )}
 
-                <Magnetic className="w-full" strength={0.2}>
-                  <button
-                    type="submit"
-                    disabled={status === "submitting"}
-                    className="btn-gradient w-full disabled:opacity-70"
-                  >
-                    {status === "submitting" ? (
-                      <>
-                        <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> Opening WhatsApp…
-                      </>
-                    ) : (
-                      <>
-                        Enquire on WhatsApp <MessageCircle className="h-4 w-4" aria-hidden="true" />
-                      </>
-                    )}
-                  </button>
-                </Magnetic>
+                <button
+                  type="submit"
+                  disabled={status === "submitting"}
+                  className="btn-gradient w-full disabled:opacity-70"
+                >
+                  {status === "submitting" ? (
+                    <>
+                      <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> Opening WhatsApp...
+                    </>
+                  ) : (
+                    <>
+                      Enquire on WhatsApp <MessageCircle className="h-4 w-4" aria-hidden="true" />
+                    </>
+                  )}
+                </button>
                 <p className="text-center text-xs text-ink/45">
                   Submitting opens WhatsApp to {SITE.phoneDisplay} with your details pre-filled.
                 </p>

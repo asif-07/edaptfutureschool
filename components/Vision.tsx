@@ -3,8 +3,8 @@
 import { Reveal } from "@/components/motion/Reveal";
 
 /**
- * Positioning / vision band — a large editorial statement with key phrases
- * highlighted in electric blue. Dark section with grain for depth.
+ * Positioning / vision band. A short, plain-spoken statement about why the
+ * school exists, with a couple of phrases highlighted in blue.
  */
 export function Vision() {
   return (
@@ -12,18 +12,16 @@ export function Vision() {
       <div className="container-x relative z-10">
         <Reveal>
           <p className="eyebrow mb-8">
-            <span className="font-mono text-white/40">01</span> / Our Vision
+            <span className="font-mono text-white/40">01</span> / Why we exist
           </p>
         </Reveal>
 
-        <Reveal delay={0.05} blur>
+        <Reveal delay={0.05}>
           <h2 className="max-w-5xl font-display text-display font-bold leading-tight text-white/90">
-            This isn&apos;t an ordinary school. It&apos;s a new{" "}
-            <span className="text-accent">learning culture</span> — bringing together{" "}
-            <span className="text-accent">AI</span>, <span className="text-accent">personalized learning</span>,{" "}
-            <span className="text-accent">real-world work</span>,{" "}
-            <span className="text-accent">entrepreneurship</span>, and{" "}
-            <span className="text-accent">future skills</span>.
+            We started Edapt because a Plus One should do more than get you through an exam. Here, students{" "}
+            <span className="text-accent">learn with AI</span>, work on{" "}
+            <span className="text-accent">real projects</span>, and get the time to figure out{" "}
+            <span className="text-accent">what they are good at</span>.
           </h2>
         </Reveal>
 

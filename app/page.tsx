@@ -3,6 +3,7 @@ import { Hero } from "@/components/Hero";
 import { Vision } from "@/components/Vision";
 import { Streams } from "@/components/Streams";
 import { WhyEdapt } from "@/components/WhyEdapt";
+import { Leadership } from "@/components/Leadership";
 import { Campus } from "@/components/Campus";
 import { Admissions } from "@/components/Admissions";
 import { EnquiryForm } from "@/components/EnquiryForm";
@@ -46,6 +47,7 @@ export default function Home() {
           <Vision />
           <Streams />
           <WhyEdapt />
+          <Leadership />
           <Campus />
           <Admissions />
           <EnquiryForm />

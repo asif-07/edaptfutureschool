@@ -2,7 +2,7 @@
   "name": "edapt-future-school",
   "version": "1.0.0",
   "private": true,
-  "description": "Marketing website for Edapt Future School — SCOLE Kerala enrolled Plus One institution, Malappuram.",
+  "description": "Marketing website for Edapt Future School, a Plus One institution in Inkel City, Malappuram.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
