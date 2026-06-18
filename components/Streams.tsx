@@ -2,6 +2,7 @@
 
 import { ArrowRight, Briefcase, Cpu, Check } from "lucide-react";
 import { RevealGroup, RevealItem, Reveal } from "@/components/motion/Reveal";
+import { SpotlightCard } from "@/components/motion/SpotlightCard";
 import { STREAMS, SITE } from "@/lib/site";
 
 // Map of icon names declared in lib/site.ts to Lucide components.
@@ -32,7 +33,11 @@ export function Streams() {
             const Icon = ICONS[stream.icon as keyof typeof ICONS];
             return (
               <RevealItem key={stream.id}>
-                <article className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-ink/10 bg-ink p-8 text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_60px_-20px_rgba(15,95,224,0.55)] sm:p-10">
+                <SpotlightCard
+                  tilt
+                  maxTilt={5}
+                  className="spotlight shine group relative flex h-full flex-col overflow-hidden rounded-3xl border border-ink/10 bg-ink p-8 text-white transition-shadow duration-300 hover:shadow-[0_24px_60px_-20px_rgba(15,95,224,0.55)] sm:p-10"
+                >
                   {/* Hover glow */}
                   <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-brand-glow opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
 
@@ -69,7 +74,7 @@ export function Streams() {
                       Apply <ArrowRight className="h-4 w-4" aria-hidden="true" />
                     </a>
                   </div>
-                </article>
+                </SpotlightCard>
               </RevealItem>
             );
           })}

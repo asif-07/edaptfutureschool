@@ -15,21 +15,23 @@ type RevealProps = {
   delay?: number;
   /** Pixels to rise from. */
   y?: number;
+  /** Add a subtle blur-in for a softer, more premium entrance. */
+  blur?: boolean;
   className?: string;
   as?: "div" | "section" | "li" | "span";
 };
 
-export function Reveal({ children, delay = 0, y = 24, className, as = "div" }: RevealProps) {
+export function Reveal({ children, delay = 0, y = 24, blur = false, className, as = "div" }: RevealProps) {
   const reduce = useReducedMotion();
   const MotionTag = motion[as];
 
   return (
     <MotionTag
       className={className}
-      initial={reduce ? { opacity: 0 } : { opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={reduce ? { opacity: 0 } : { opacity: 0, y, filter: blur ? "blur(8px)" : "blur(0px)" }}
+      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
       viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
     >
       {children}
     </MotionTag>

@@ -93,6 +93,49 @@
     @apply text-electric;
   }
 
+  /* Cursor-following spotlight glow. Position driven by --mx/--my set in
+     SpotlightCard. Pair this class with `relative` + rounded corners. */
+  .spotlight::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    background: radial-gradient(
+      240px circle at var(--mx, 50%) var(--my, 50%),
+      rgba(15, 95, 224, 0.18),
+      transparent 60%
+    );
+  }
+  .spotlight:hover::after {
+    opacity: 1;
+  }
+
+  /* Animated conic shimmer used for premium card borders. */
+  .shine {
+    position: relative;
+    overflow: hidden;
+  }
+  .shine::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -150%;
+    height: 100%;
+    width: 60%;
+    transform: skewX(-20deg);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+    transition: left 0.7s ease;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .shine:hover::before {
+    left: 150%;
+  }
+
   /* Subtle grain/noise overlay for dark sections (adds premium depth).
      Pure CSS via an inline SVG so no asset download is required. */
   .grain::before {

@@ -1,9 +1,11 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { CheckCircle2, Loader2, Send, AlertCircle } from "lucide-react";
+import { MessageCircle, Loader2, AlertCircle } from "lucide-react";
 import { Reveal } from "@/components/motion/Reveal";
+import { Magnetic } from "@/components/motion/Magnetic";
 import { STREAMS, SITE } from "@/lib/site";
+import { buildWhatsAppEnquiryUrl } from "@/lib/whatsapp";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
@@ -18,6 +20,9 @@ export function EnquiryForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<Errors>({});
   const [form, setForm] = useState({ name: "", phone: "", stream: "", message: "" });
+  // Keep the built WhatsApp URL so we can show a manual fallback link if the
+  // browser blocks the auto-opened tab (e.g. strict popup blockers).
+  const [waUrl, setWaUrl] = useState("");
 
   function validate(): boolean {
     const next: Errors = {};
@@ -31,22 +36,29 @@ export function EnquiryForm() {
     return Object.keys(next).length === 0;
   }
 
-  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!validate()) return;
     setStatus("submitting");
-    try {
-      const res = await fetch("/api/enquiry", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
-      if (!res.ok) throw new Error("Request failed");
-      setStatus("success");
-      setForm({ name: "", phone: "", stream: "", message: "" });
-    } catch {
-      setStatus("error");
-    }
+
+    // Build the pre-filled WhatsApp deep link and open it. Opening happens
+    // synchronously within the click handler so popup blockers allow it.
+    const url = buildWhatsAppEnquiryUrl(form);
+    setWaUrl(url);
+    window.open(url, "_blank", "noopener,noreferrer");
+
+    // Fire-and-forget: also log the lead to our backend (optional backup /
+    // CRM hook). Failure here doesn't affect the WhatsApp hand-off.
+    fetch("/api/enquiry", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(form),
+    }).catch(() => {
+      /* non-blocking */
+    });
+
+    setStatus("success");
+    setForm({ name: "", phone: "", stream: "", message: "" });
   }
 
   return (
@@ -81,20 +93,28 @@ export function EnquiryForm() {
           <div className="rounded-3xl border border-ink/10 bg-white p-6 shadow-xl sm:p-8">
             {status === "success" ? (
               <div className="flex flex-col items-center justify-center py-12 text-center" role="status" aria-live="polite">
-                <CheckCircle2 className="h-14 w-14 text-electric" aria-hidden="true" />
-                <h3 className="mt-4 font-display text-2xl font-bold text-ink">Thank you!</h3>
+                <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366]/15 text-[#25D366]">
+                  <MessageCircle className="h-8 w-8" aria-hidden="true" />
+                </span>
+                <h3 className="mt-4 font-display text-2xl font-bold text-ink">Opening WhatsApp…</h3>
                 <p className="mt-2 max-w-sm text-ink/60">
-                  Your enquiry has been received. Our admissions team will reach out shortly. For anything
-                  urgent, call{" "}
-                  <a href={`tel:${SITE.phoneRaw}`} className="font-semibold text-electric">
-                    {SITE.phoneDisplay}
-                  </a>
-                  .
+                  We&apos;ve opened a WhatsApp chat with your details ready to send. Just hit send and our
+                  admissions team will take it from there.
                 </p>
+                {waUrl && (
+                  <a
+                    href={waUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#25D366] px-6 py-3 text-sm font-bold text-white transition-transform hover:-translate-y-0.5"
+                  >
+                    <MessageCircle className="h-4 w-4" aria-hidden="true" /> Open WhatsApp
+                  </a>
+                )}
                 <button
                   type="button"
                   onClick={() => setStatus("idle")}
-                  className="mt-6 text-sm font-semibold text-ink/60 underline-offset-4 hover:text-ink hover:underline"
+                  className="mt-4 text-sm font-semibold text-ink/60 underline-offset-4 hover:text-ink hover:underline"
                 >
                   Submit another enquiry
                 </button>
@@ -169,17 +189,26 @@ export function EnquiryForm() {
                   </p>
                 )}
 
-                <button type="submit" disabled={status === "submitting"} className="btn-gradient w-full disabled:opacity-70">
-                  {status === "submitting" ? (
-                    <>
-                      <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> Sending…
-                    </>
-                  ) : (
-                    <>
-                      Submit Enquiry <Send className="h-4 w-4" aria-hidden="true" />
-                    </>
-                  )}
-                </button>
+                <Magnetic className="w-full" strength={0.2}>
+                  <button
+                    type="submit"
+                    disabled={status === "submitting"}
+                    className="btn-gradient w-full disabled:opacity-70"
+                  >
+                    {status === "submitting" ? (
+                      <>
+                        <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> Opening WhatsApp…
+                      </>
+                    ) : (
+                      <>
+                        Enquire on WhatsApp <MessageCircle className="h-4 w-4" aria-hidden="true" />
+                      </>
+                    )}
+                  </button>
+                </Magnetic>
+                <p className="text-center text-xs text-ink/45">
+                  Submitting opens WhatsApp to {SITE.phoneDisplay} with your details pre-filled.
+                </p>
               </form>
             )}
           </div>

@@ -9,6 +9,8 @@ import { EnquiryForm } from "@/components/EnquiryForm";
 import { FinalCTA } from "@/components/FinalCTA";
 import { Footer } from "@/components/Footer";
 import { MobileCTA } from "@/components/MobileCTA";
+import { SmoothScroll } from "@/components/motion/SmoothScroll";
+import { ScrollProgress } from "@/components/motion/ScrollProgress";
 import { SITE } from "@/lib/site";
 
 // Structured data for rich search results (EducationalOrganization).
@@ -36,18 +38,21 @@ export default function Home() {
         // JSON-LD is static and trusted (built from our own constants).
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <ScrollProgress />
       <Navbar />
-      <main className="pb-20 lg:pb-0">
-        <Hero />
-        <Vision />
-        <Streams />
-        <WhyEdapt />
-        <Campus />
-        <Admissions />
-        <EnquiryForm />
-        <FinalCTA />
-      </main>
-      <Footer />
+      <SmoothScroll>
+        <main className="pb-20 lg:pb-0">
+          <Hero />
+          <Vision />
+          <Streams />
+          <WhyEdapt />
+          <Campus />
+          <Admissions />
+          <EnquiryForm />
+          <FinalCTA />
+        </main>
+        <Footer />
+      </SmoothScroll>
       <MobileCTA />
     </>
   );

@@ -16,6 +16,8 @@ export const SITE = {
   // Phone is displayed with a space for readability; tel: links use the raw number.
   phoneDisplay: "9072 616200",
   phoneRaw: "9072616200",
+  // WhatsApp number in full international format (no +, no spaces) for wa.me links.
+  whatsappNumber: "919072616200",
   campus: {
     line1: "Edapt Campus, Inkel City",
     line2: "Malappuram, Kerala",

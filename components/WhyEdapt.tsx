@@ -12,6 +12,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { RevealGroup, RevealItem, Reveal } from "@/components/motion/Reveal";
+import { SpotlightCard } from "@/components/motion/SpotlightCard";
 
 /** Feature cards — each with a Lucide icon, animated in on scroll. */
 const FEATURES: { icon: LucideIcon; title: string; desc: string }[] = [
@@ -47,13 +48,13 @@ export function WhyEdapt() {
         <RevealGroup className="mt-14 grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4">
           {FEATURES.map(({ icon: Icon, title, desc }) => (
             <RevealItem key={title}>
-              <div className="glass glass-hover group h-full rounded-2xl p-5 sm:p-6">
-                <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-electric/15 text-electric transition-colors group-hover:bg-electric/25">
+              <SpotlightCard className="spotlight glass glass-hover group relative h-full overflow-hidden rounded-2xl p-5 sm:p-6">
+                <span className="relative z-10 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-electric/15 text-electric transition-all duration-300 group-hover:scale-110 group-hover:bg-electric/25">
                   <Icon className="h-5 w-5" aria-hidden="true" />
                 </span>
-                <h3 className="mt-4 font-display text-base font-bold text-white sm:text-lg">{title}</h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-white/55">{desc}</p>
-              </div>
+                <h3 className="relative z-10 mt-4 font-display text-base font-bold text-white sm:text-lg">{title}</h3>
+                <p className="relative z-10 mt-1.5 text-sm leading-relaxed text-white/55">{desc}</p>
+              </SpotlightCard>
             </RevealItem>
           ))}
         </RevealGroup>

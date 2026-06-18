@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { MessageSquare, MapPin, FileCheck, GraduationCap, type LucideIcon } from "lucide-react";
 import { RevealGroup, RevealItem, Reveal } from "@/components/motion/Reveal";
 
@@ -30,9 +31,13 @@ export function Admissions() {
         </Reveal>
 
         <RevealGroup className="relative mt-16 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
-          {/* Connecting line (desktop) */}
-          <div
-            className="pointer-events-none absolute left-0 right-0 top-7 hidden h-px bg-gradient-to-r from-transparent via-white/20 to-transparent lg:block"
+          {/* Connecting line (desktop) — draws itself in on scroll */}
+          <motion.div
+            className="pointer-events-none absolute left-0 right-0 top-7 hidden h-px origin-left bg-gradient-to-r from-transparent via-electric/50 to-transparent lg:block"
+            initial={{ scaleX: 0, opacity: 0 }}
+            whileInView={{ scaleX: 1, opacity: 1 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
             aria-hidden="true"
           />
 

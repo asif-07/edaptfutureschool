@@ -16,7 +16,7 @@ export function Vision() {
           </p>
         </Reveal>
 
-        <Reveal delay={0.05}>
+        <Reveal delay={0.05} blur>
           <h2 className="max-w-5xl font-display text-display font-bold leading-tight text-white/90">
             This isn&apos;t an ordinary school. It&apos;s a new{" "}
             <span className="text-accent">learning culture</span> — bringing together{" "}
